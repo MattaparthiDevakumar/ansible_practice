@@ -1,0 +1,5 @@
+---
+ vars:
+  - myport: 9090
+  - file_path: /tmp/apache-tomcat-8.5.41/conf/server.xml
+

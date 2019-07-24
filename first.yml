@@ -1,0 +1,6 @@
+---
+ - hosts: dev
+   tasks: 
+    - name: ping task
+      shell: /bin/echo hello deva
+

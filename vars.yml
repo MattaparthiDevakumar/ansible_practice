@@ -1,0 +1,9 @@
+---
+ - hosts: dev
+   tasks:
+    - include: apache.yml
+    - name: install package
+      shell: /bin/echo {{ package }}
+      register: output
+ 
+    - debug: var=output 

@@ -1,0 +1,6 @@
+---
+ - hosts: dev
+   tasks: 
+    - name: display name
+      shell: /bin/echo rehdat
+      when: ansible_os_family == "RedHat"

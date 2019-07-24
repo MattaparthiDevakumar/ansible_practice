@@ -1,0 +1,19 @@
+---
+ - hosts: dev
+   vars:
+    - name: redhat
+   vars_files:
+    - var_file.yml
+   tasks:
+    - include: apache.yml
+    - name: install pack
+      shell: /bin/echo {{ pack_name }}
+      register: output
+    - name: install pack1
+      shell: /bin/echo {{ username }}
+      register: output1
+    - debug: var=output
+    - debug: var=output.stdout
+
+    - debug: var=output1
+    - debug: var=output1.stdout

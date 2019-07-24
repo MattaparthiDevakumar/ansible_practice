@@ -1,0 +1,9 @@
+---
+ - hosts: dev
+   tasks:
+    - name: Ensure SELinux is set to enforcing mode
+      lineinfile:
+       path: /opt/test
+       regexp: '^-->'
+       line: --> DEV=santhosh deva kumar
+       line: --> gdgdgdgd

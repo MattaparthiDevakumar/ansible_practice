@@ -1,0 +1,11 @@
+---
+ - hosts: dev
+   tasks: 
+    - name: display name
+      shell: /bin/echo rehdat
+      register: out
+
+    - name: display uptime
+      shell: uptime
+      when: out.rc == 0
+

@@ -1,0 +1,13 @@
+---
+ - hosts: dev
+   tasks:
+    - name: Sending an e-mail using Gmail SMTP servers
+      mail:
+       host: smtp.gmail.com
+       port: 465
+       username: devakumar559@gmail.com
+       password: devakumar#7241
+       to: John Smith <devakumar559@gmail.com>
+       subject: Ansible-report
+       body: System has been successfully provisioned.
+      delegate_to: localhost

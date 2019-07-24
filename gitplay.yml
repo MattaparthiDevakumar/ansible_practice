@@ -1,0 +1,38 @@
+---
+ - hosts: dev
+   tasks:
+    - name: gitinstall
+      yum: name=git state=present
+      tags:
+       - gitinstall
+    - name: directory
+      file: path=/tmp/gitproject state=directory
+      tags:
+       - directory
+    - name: gitinit
+      command: git init /tmp/gitproject
+      tags:
+       - gitinit
+    - name: gituser
+      command: git config --global user.name "deva" /tmp/gitproject
+      tags:
+       - gituser
+    - name: gitemail
+      command: git config --global user.email "deva@gmail.com" /tmp/gitproject
+      tags:
+       - gitemail
+    - name: createfile
+      file: path=/tmp/gitproject/ragava state=touch
+      tags: 
+       - createfile
+    - name: add
+      shell: cd /tmp/gitproject && git add . && git commit -m "deva commit" 
+      tags:
+       - add
+    - name: push
+      shell: cd /tmp/gitproject && git remote remove origin
+    - name: gitremote
+      shell: cd /tmp/gitproject && git remote add origin git@github.com:MattaparthiDevakumar/gitplay.git
+    - name: gitpush
+      shell: cd /tmp/gitproject && gitpush -u origin master
+

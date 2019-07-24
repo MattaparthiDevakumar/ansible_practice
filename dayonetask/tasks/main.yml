@@ -1,0 +1,9 @@
+---
+ - name: install httd
+   yum: name=httpd state=present
+   notify:
+     - restart apache
+ - name: copy file.txt from files directory
+   copy: src=file.txt dest=/tmp
+ - name: copy template.txt from template directory
+   template: src=template.txt dest=/tmp

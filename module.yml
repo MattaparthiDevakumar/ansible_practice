@@ -1,0 +1,39 @@
+---
+ - hosts: dev
+   tasks:
+    - name: command task
+      command: cat /etc/hosts
+    - name: raw task
+      raw: cat /etc/hosts
+      register: raww
+      tags:
+       - tag1
+    - name: shell task
+      shell: ls -lart
+    - name: archive task 
+      archive: path=/opt/ansibletesting format=zip dest=/opt/ansible.tgz
+    - name: copy task 
+      copy: src=/opt/Ansible/file.txt dest=/tmp owner=root group=root mode=0644
+    - name: fetch task
+      fetch: src=/tmp/test dest=/tmp
+    - name: file1 task 
+      file: path=/tmp/devfile owner=root state=touch
+    - name: file2 task
+      file: path=/tmp/devdirect owner=root state=directory
+    - name: create directory task
+      command: mkdir /tmp/hello
+    - name: file3 task
+      file: path=/tmp/hello owner=root state=absent
+    - name: state task
+      stat: path=/etc/hosts
+    - name: service task
+      service: name=httpd state=started
+    - name: geturl task
+      get_url: url=http://us.mirrors.quenda.co/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz               dest=/tmp/foo.conf mode=0440
+    - pip:
+        name: bottle
+    - name: get the facts for default pip, pip2 and pip3.6
+      pip_package_info: clients=pip  
+
+    - debug: var=raww
+    - debug: var=raww.stdout

@@ -1,0 +1,10 @@
+---
+ - hosts: dev
+   tasks:
+    - name: raw task
+      raw: cat /etc/hosts
+      register: raww
+
+    - debug: var=raww
+    - debug: var=raww.stdout
+

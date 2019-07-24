@@ -1,0 +1,10 @@
+---
+ - hosts: dev
+   vars_files:
+    - vaultpass.yml
+   tasks:
+    - name: display name
+      shell: /bin/echo {{ name }}
+      register: output
+
+    - debug: var=output

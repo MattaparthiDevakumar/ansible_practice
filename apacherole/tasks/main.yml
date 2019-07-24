@@ -1,0 +1,60 @@
+---
+ - name: java installation
+   yum: name=java-1.8.0-openjdk.x86_64 state=present
+   tags:
+    - java installation
+ - name: intalling httpd
+   yum: name=httpd state=present
+   notify:
+    - start httpd
+   tags:
+    - intalling httpd
+ - name: tomcat
+   get_url: url=http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz dest=/tmp/
+   tags:
+    - tomcat
+ - name: extract
+   unarchive:
+    src: /tmp/apache-tomcat-8.5.41.tar.gz
+    dest: /tmp/
+    remote_src: yes
+   tags:
+    - extract
+ - name: tomcat start
+   command: nohup /tmp/apache-tomcat-8.5.41/bin/startup.sh
+   tags:
+    - tomcat start
+ - name: useradd
+   lineinfile:
+    path: /tmp/apache-tomcat-8.5.41/conf/tomcat-users.xml
+    regexp: '^-->'
+    line: --> <role rolename="manager-gui"/> <user username="admin" password="admin" roles="manager-gui"/>
+   tags:
+    - useradd
+ - name: delete syntax
+   replace:
+    path: /tmp/apache-tomcat-8.5.41/webapps/manager/META-INF/context.xml
+    regexp: '<Valve className="org.apache.catalina.valves.RemoteAddrValve"'
+    replace: '<!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve"'
+   tags:
+    - delete syntax
+ - name: delete2
+   lineinfile:
+    path: /tmp/apache-tomcat-8.5.41/webapps/manager/META-INF/context.xml
+    regexp: 'allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />'
+    line: allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+   tags:
+    - delete2
+ - name: portchange
+   lineinfile:
+    dest: "/tmp/apache-tomcat-8.5.41/conf/server.xml" 
+    regexp: "^port"
+    line: "port 9090"
+    remote_src: yes
+   tags:
+    - portchange
+ - name: tomcat start
+   command: nohup /tmp/apache-tomcat-8.5.41/bin/startup.sh
+   tags:
+    - tomcat start
+

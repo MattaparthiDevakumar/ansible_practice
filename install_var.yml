@@ -1,0 +1,8 @@
+---
+ - hosts: dev
+   tasks:
+    - include: apache.yml
+    - name: installing httpd package
+      shell: /bin/echo {{ package }}
+      register: out
+    - debug: var=out

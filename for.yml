@@ -1,0 +1,9 @@
+---
+ - hosts: dev
+   tasks:
+     - name: creatd users
+       shell: useradd {{ item }}
+       with_items: 
+        - one
+        - two
+        - three
