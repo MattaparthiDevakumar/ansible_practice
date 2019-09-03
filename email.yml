@@ -5,7 +5,7 @@
       mail:
        host: smtp.gmail.com
        port: 465
-       username: devakumar559@gmail.com
+       username: yourmail@gmail.com
        password: *************
        to: John Smith <devakumar559@gmail.com>
        subject: Ansible-report
