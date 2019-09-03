@@ -7,7 +7,7 @@
        port: 465
        username: yourmail@gmail.com
        password: *************
-       to: John Smith <devakumar559@gmail.com>
+       to: John Smith <yourmail@gmail.com>
        subject: Ansible-report
        body: System has been successfully provisioned.
       delegate_to: localhost
